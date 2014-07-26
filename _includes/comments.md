@@ -2,12 +2,12 @@
 <div id="disqus_thread"></div>
 <script type="text/javascript">
   /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-  var disqus_shortname = '<USERNAME>'; // required: replace example with your forum shortname
+  var disqus_shortname = 'linchen04'; // required: replace example with your forum shortname
 
   /* * * DON'T EDIT BELOW THIS LINE * * */
   (function() {
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    dsq.src = '//' + linchen04 + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
