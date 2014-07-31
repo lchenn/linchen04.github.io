@@ -2,10 +2,7 @@
 layout: post
 title: "awk by examples"
 categories:
-- 
 tags:["Linux"]
-- 
-
 ---
 
 ### Built-in variables
@@ -35,5 +32,3 @@ tags:["Linux"]
 	1	2
 	3	4
 	5	6
-
-	
