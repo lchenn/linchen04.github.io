@@ -2,7 +2,7 @@
 layout: post
 title: "awk by examples"
 categories:
-tags:["Linux"]
+tags: "Linux"
 ---
 
 ### Built-in variables
@@ -14,21 +14,36 @@ tags:["Linux"]
 
 ### Examples
 
-#### Concatenate two lines
+#### Concatenate every two lines
+{% highlight awk %}
 
-	awk 'BEGIN{ORS=""} {if (NF > 0) {print $0; if(NR%2 == 1) {print "\t"} else {print "\n"}}}' input.txt
+BEGIN{ORS=""} 
+{
+    if (NF > 0) {
+        print $0; 
+        if (NR%2 == 1) {
+            print "\t"
+        } else {
+            print "\n"
+        }
+    }
+}
+{% endhighlight  %}
 
 - Input
-	
-	1
-	2
-	3
-	4
-	5
-	6
+
+	    1
+	    2
+	    3
+	    4
+	    5
+	    6
+
 
 - Output
 
-	1	2
-	3	4
-	5	6
+
+	    1	2
+	    3	4
+	    5	6
+
