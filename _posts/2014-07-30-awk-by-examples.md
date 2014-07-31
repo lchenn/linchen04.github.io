@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "awk by examples"
+title: "Awk By Examples"
 categories:
 tags: "Linux"
 ---
