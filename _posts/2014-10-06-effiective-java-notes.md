@@ -5,7 +5,7 @@ categories:
 tags: "Java"
 ---
 
-### Item 8 Overriding equals()
+## Item 8 Overriding equals()
 
 1. Use the == operator to check if the argument is a reference to this object.
 2. Use the instanceof operator to check if the argument has the correct type.
@@ -18,3 +18,6 @@ tags: "Java"
     
 5. Is it symmetric? Is it transitive? Is it consistent
 
+## Item 13 Minimizing the accessibility of classes and members
+
+- The rule of thumb: ***Make each class or member as inaccessible as possible***
