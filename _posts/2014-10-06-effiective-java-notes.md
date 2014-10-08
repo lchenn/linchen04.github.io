@@ -21,3 +21,6 @@ tags: "Java"
 ## Item 13 Minimizing the accessibility of classes and members
 
 - The rule of thumb: ***Make each class or member as inaccessible as possible***
+- Instance fields should never be public
+- Classes with public mutable fields are not thread-safe
+- Nonzero-length array is always mutable, a class should not have a public static final array field, or an accessor that returns such a field
