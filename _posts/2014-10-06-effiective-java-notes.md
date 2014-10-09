@@ -29,4 +29,4 @@ tags: "Java"
 
 - Immutable objects are inherently thread-safe; they require no synchronization.
 - The disadvantage of immutable classes is that they require a separate object for each distinct value. 
-- To make a class immutable, we can 1) Make the class final 2) Make constructor private or package-private, and provide public factory method
+- To make a class immutable, we can 1) Make the class final 2) Make constructor private or package-private, and provide public factory method where the original constructor is
