@@ -25,7 +25,7 @@ tags: "Java"
 - Classes with public mutable fields are not thread-safe
 - Nonzero-length array is always mutable, a class should not have a public static final array field, or an accessor that returns such a field
 
-### Minimize mutability
+### Item 15 Minimize mutability
 
 - Immutable objects are inherently thread-safe; they require no synchronization.
 - The disadvantage of immutable classes is that they require a separate object for each distinct value. 
