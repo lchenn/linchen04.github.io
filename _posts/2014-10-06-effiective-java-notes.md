@@ -29,4 +29,31 @@ tags: "Java"
 
 - Immutable objects are inherently thread-safe; they require no synchronization.
 - The disadvantage of immutable classes is that they require a separate object for each distinct value. 
-- To make a class immutable, we can 1) Make the class final 2) Make constructor private or package-private, and provide public factory method where the original constructor is
+- To make a class immutable, we can 1) Make the class final 2) Make constructor private or package-private, and provide public factory method where the original constructor is.
+
+
+### Item 45 Minimize the scope of local variables
+- Prefer ```for``` loop to ```while``` loop. ```for``` loop provides a place to initialize ```loop variable```
+
+    ```java
+    //this is not that good
+    Iterator<Element> i = c.iterator();
+    while (i.hasNext()) {
+        doSomething(i.next());
+    }
+
+    //this is better
+    for (Iterator i = c.iterator(); i.hasNext(); ) {
+        doSomething(i.next());
+    }
+    ```
+
+### Item 46 Prefer for-each loop to traditional ```for``` loop
+- for-each loop is better in general
+- Implement the ```Iterable``` interface will eanble the support of for-each loop
+
+    ```java
+    public interface Iterable<E> {
+        Iterator<E> iterator();
+    }
+    ```
