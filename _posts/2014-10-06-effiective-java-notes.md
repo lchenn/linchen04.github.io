@@ -5,7 +5,7 @@ categories:
 tags: "Java"
 ---
 
-## Item 8 Overriding equals()
+### Item 8 Overriding equals()
 
 1. Use the == operator to check if the argument is a reference to this object.
 2. Use the instanceof operator to check if the argument has the correct type.
@@ -18,9 +18,15 @@ tags: "Java"
     
 5. Is it symmetric? Is it transitive? Is it consistent
 
-## Item 13 Minimizing the accessibility of classes and members
+### Item 13 Minimizing the accessibility of classes and members
 
 - The rule of thumb: ***Make each class or member as inaccessible as possible***
 - Instance fields should never be public
 - Classes with public mutable fields are not thread-safe
 - Nonzero-length array is always mutable, a class should not have a public static final array field, or an accessor that returns such a field
+
+### Minimize mutability
+
+- Immutable objects are inherently thread-safe; they require no synchronization.
+- The disadvantage of immutable classes is that they require a separate object for each distinct value. 
+- To make a class immutable, we can 1) Make the class final 2) Make constructor private or package-private, and provide public factory method
