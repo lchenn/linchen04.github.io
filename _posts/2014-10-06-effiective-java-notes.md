@@ -95,9 +95,11 @@ tags: "Java"
 ### Item 63: Include failure-capture information in detail messages
 ### Item 65: Don’t ignore exceptions
 Don't do this:
+
     ```java
     //empty catch, it is like turning of the alarm
     try {
     } catch (SomeException e) {
     }
     ```
+
