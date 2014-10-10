@@ -81,6 +81,19 @@ tags: "Java"
 
 ## Section 9: Exceptions
 
+### Item 57: Use exceptions only for exceptional conditions
+Don't do this:
+
+```java
+try {
+    int i = 0;
+    while(true) {
+        range[i++].climb();
+    }
+} catch(ArrayIndexOutOfBoundsException e) {
+}
+```
+
 ### Item 60: Favor the use of standard exceptions
 - IllegalArgumentException
 - IllegalStateException
