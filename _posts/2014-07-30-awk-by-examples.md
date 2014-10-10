@@ -21,7 +21,22 @@ tags: "Linux"
 | ORS   | Output Record Separator |
 | FILENAME | Current file's name |
 
+### Basic
 
+The essential organization (block) of an awk program follows the form:
+
+```awk
+pattern { action }
+```
+
+There are many other ways to selectively execute a block of code. We can place any kind of boolean expression before a code block to control when a particular block is executed. Awk will execute a code block only if the preceding boolean expression evaluates to true.
+
+There are two important blocks: ```BEGIN``` and ```END```. The basic structure is
+```awk
+BEGIN{}
+{}
+END{}
+```
 
 ### Examples
 
@@ -87,6 +102,9 @@ awk -v val=$x '{print $1, $2, $3, $4+val, $5+ENVIRON["y"]}' OFS="\t" score.txt
 ```
 awk -F: '{print $2}'
 awk 'BEGIN{FS=":"} {print $2}'
+
+### Multiple FS
+awk -F '[;:]' '{print $2}'
 ```
 
 
@@ -97,5 +115,11 @@ awk 'BEGIN {srand()} !/^$/ { if (rand() <= .10) print $0}'
 
 ### Match a certain field and print
 ```awk
+### regular exression match
 awk '$6 ~ /FIN/ || NR==1 {print NR,$4,$5,$6}' OFS="\t" netstat.txt
+
+### regular expression not match
+awk '$6 !~ /FIN/ || NR==1 {print N$,$4,$5,$6}' OFS='\t' netstat.txt
 ```
+
+
