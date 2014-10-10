@@ -96,10 +96,9 @@ tags: "Java"
 ### Item 65: Don’t ignore exceptions
 Don't do this:
 
-    ```java
-    //empty catch, it is like turning of the alarm
-    try {
-    } catch (SomeException e) {
-    }
-    ```
-
+```java
+//empty catch, it is like turning of the alarm
+try {
+} catch (SomeException e) {
+}
+```
