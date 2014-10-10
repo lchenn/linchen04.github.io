@@ -74,3 +74,15 @@ tags: "Java"
 ### Item 51 String concatenation
 - Use StringBuilder when a lot of String need to be concatenated
 
+
+## Section 9
+
+### Item 60 Use standard Exception classes
+- IllegalArgumentException
+- IllegalStateException
+- NullPointerException
+- IndexOutOfBoundsException
+- ConcurrentModificationException
+- UnsupportedOperationException
+- ArithmeticException
+- NumberFormatException
