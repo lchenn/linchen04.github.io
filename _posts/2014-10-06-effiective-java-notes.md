@@ -32,6 +32,10 @@ tags: "Java"
 - To make a class immutable, we can 1) Make the class final 2) Make constructor private or package-private, and provide public factory method where the original constructor is.
 
 
+
+
+## Section 8
+
 ### Item 45 Minimize the scope of local variables
 - Prefer ```for``` loop to ```while``` loop. ```for``` loop provides a place to initialize ```loop variable```
 
@@ -50,7 +54,7 @@ tags: "Java"
 
 ### Item 46 Prefer for-each loop to traditional ```for``` loop
 - for-each loop is better in general
-- Implement the ```Iterable``` interface will eanble the support of for-each loop
+- Implement the ```Iterable``` interface will enable the support of for-each loop
 
     ```java
     public interface Iterable<E> {
@@ -75,9 +79,9 @@ tags: "Java"
 - Use StringBuilder when a lot of String need to be concatenated
 
 
-## Section 9
+## Section 9: Exceptions
 
-### Item 60 Use standard Exception classes
+### Item 60: Favor the use of standard exceptions
 - IllegalArgumentException
 - IllegalStateException
 - NullPointerException
@@ -86,3 +90,14 @@ tags: "Java"
 - UnsupportedOperationException
 - ArithmeticException
 - NumberFormatException
+
+### Item 62: Document all exceptions thrown by each method
+### Item 63: Include failure-capture information in detail messages
+### Item 65: Don’t ignore exceptions
+Don't do this:
+    ```java
+    //empty catch, it is like turning of the alarm
+    try {
+    } catch (SomeException e) {
+    }
+    ```
