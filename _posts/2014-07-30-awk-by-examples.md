@@ -32,6 +32,7 @@ pattern { action }
 There are many other ways to selectively execute a block of code. We can place any kind of boolean expression before a code block to control when a particular block is executed. Awk will execute a code block only if the preceding boolean expression evaluates to true.
 
 There are two important blocks: ```BEGIN``` and ```END```. The basic structure is
+
 ```awk
 BEGIN{}
 {}
