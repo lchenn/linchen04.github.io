@@ -57,3 +57,20 @@ tags: "Java"
         Iterator<E> iterator();
     }
     ```
+
+### Item 47 Know and use the libraries
+- Libraries is written and tested
+- Standard libraries to lear
+  * java.lang
+  * java.util
+  * java.io
+  * java.util.concurrent
+
+
+### Item 48 Regarding float and double
+- Use ```BigDecimal```, ```int``` or ```long``` for currency calculation
+
+
+### Item 51 String concatenation
+- Use StringBuilder when a lot of String need to be concatenated
+
