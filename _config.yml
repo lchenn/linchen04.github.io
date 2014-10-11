@@ -2,7 +2,6 @@ markdown: rdiscount
 permalink: /:year/:month/:day/:title/
 url: http://linchen04.github.com
 author: linchen04
-pygments: true
+highlighter: pygments
 safe: true
 paginate: 16
-auto: true
