@@ -59,9 +59,15 @@ Functions are different from scripts:
 
 ```type``` can show how the shell will interpret a command.
 
+### Shell Variables
+- Shell variables are named places to store data, and their values can be obtained by ```$variable_name```
+- ***Environment variables***, are conventionally named in ***all capital letters***, and their values are made known to subprocesses using ```export``` command
+
+Position 
+
 ### Comment
 
-### Variables
+
 
 
 ### String Operation
