@@ -13,9 +13,9 @@ tags: "Java"
 4. For each “significant” field in the class, check if that field of the argument matches the corresponding field of this object. 
     - Use ***Float.compare*** and ***Double.compare*** for float and double type.
     - Avoid NullPointerException
-    
-        (field == null ? o.field == null : field.equals(o.field))
-    
+```java
+(field == null ? o.field == null : field.equals(o.field))
+```
 5. Is it symmetric? Is it transitive? Is it consistent
 
 ### Item 13 Minimizing the accessibility of classes and members
@@ -38,6 +38,7 @@ tags: "Java"
 
 ### Item 45 Minimize the scope of local variables
 - Prefer ```for``` loop to ```while``` loop. ```for``` loop provides a place to initialize ```loop variable```
+
 
     ```java
     //this is not that good
