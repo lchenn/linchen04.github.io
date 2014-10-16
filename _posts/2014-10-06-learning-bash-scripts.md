@@ -99,7 +99,47 @@ Positional parameters are read-only.
 - ```local``` can be used to define local variables
 
 
-### String Operation
+### String Operators
+
+Substitution operators
+
+- ${varname:-word}: if varname exists and is not null, return its value; otherwise return word 
+
+```bash
+${count:-0}
+# if count is defined, return its value
+# otherwise, return 0
+```
+- ${varname:=word}: if varname exists and is not null, return its value; otherwise, set varname to word, and return word.
+
+```bash
+${count:=0}
+# if count is defined, return its value
+# otherwise, count will be 0, and return 0
+```
+
+- ${varname:?message}: if var exists and is not null, return its value; otherwise, print: varname: followed by message, and abort current command or script. Omitting message produces the default message ***parameter null or not set***
+
+```bash
+${count:?"undefined"}
+# if count is not defined, prints "count:undefined!"
+# otherwise, return the value of count
+```
+
+- ${varname:+word}: if varname exists and is not null, return ***word***; otherwise, return ***null***
+```bash
+${count:+1}
+# if count is defined, return 1
+# otherwise, return null
+```
+
+- ${varname:offset:length}: perform substring expansion. 
+```bash
+count="frogfottman"
+${count:4} ### it returns footman
+${count:4:4} ### it returns foot
+```
+
 #### String Concatenation
 #### String Extraction
 
