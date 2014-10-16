@@ -1,4 +1,4 @@
-markdown: rdiscount
+markdown: redcarpet
 permalink: /:year/:month/:day/:title/
 url: http://linchen04.github.com
 author: linchen04
