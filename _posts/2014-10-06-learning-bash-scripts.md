@@ -68,14 +68,16 @@ Functions are different from scripts:
 #### Variable syntax
 Shell variables can be in two format:
 
-- $var
-- ${var}
-
-It is safe to omit the curly brackets ({}) if the variable is not followed by a character that is not a letter, digit, or underscore.
-
 ```bash
-### it shold be ${UID}_, otherwise, the variable name is considered at "UID_"
-echo $UID_ 
+$var
+# or
+${var}
+
+# It is safe to omit the curly brackets ({}) 
+# if the variable is not followed by a character that is not a letter, digit, or underscore.
+
+Example:
+echo $UID_ #it shold be ${UID}_, otherwise, the variable name is considered at "UID_"
 ```
 
 #### Positional parameters
