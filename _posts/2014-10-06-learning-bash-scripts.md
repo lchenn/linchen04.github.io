@@ -18,6 +18,7 @@ Ctrl + Y # Past (after Ctrl + U, K or W)
 Ctrl + R # Reverse search bash history
 !! # Repeat last command
 Ctrl + Z # stop current command and put it into background
+```
 
 ### Ways to execute Bash scripts
 - Execute directly, ```chmod +x``` is required, script will run in a sub-shell.
