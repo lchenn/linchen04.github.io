@@ -5,6 +5,20 @@ categories:
 tags: "Linux"
 ---
 
+### Bash terminal shortcuts
+```bash
+Ctrl + L # clear the terminal
+Ctrl + D # log count
+Ctrl + A # Move cursor to the start of line
+Ctrl + E # Move cursor to the end of line
+Ctrl + U # Delete left of the cursor
+Ctrl + K # Delete right of the curor
+Ctrl + W # Delete word on the left
+Ctrl + Y # Past (after Ctrl + U, K or W)
+Ctrl + R # Reverse search bash history
+!! # Repeat last command
+Ctrl + Z # stop current command and put it into background
+
 ### Ways to execute Bash scripts
 - Execute directly, ```chmod +x``` is required, script will run in a sub-shell.
 
@@ -90,6 +104,9 @@ echo "$*"
 
 
 - $@: equals "$1" "$2" "$3" ... "$N"
+- $?: returns the exit status of the last command
+- $$: returns the processs id of the script
+- $-: returns the options given to the shell
 
 Positional parameters are read-only.
 
@@ -127,6 +144,7 @@ ${count:?"undefined"}
 ```
 
 - ${varname:+word}: if varname exists and is not null, return ***word***; otherwise, return ***null***
+
 ```bash
 ${count:+1}
 # if count is defined, return 1
@@ -134,22 +152,147 @@ ${count:+1}
 ```
 
 - ${varname:offset:length}: perform substring expansion. 
+
 ```bash
 count="frogfottman"
 ${count:4} ### it returns footman
 ${count:4:4} ### it returns foot
 ```
 
+### Quoting
+
+```bash
+\c             #Take character c literally.
+`cmd`          #Run cmd and replace it in the line of code with its output.
+"whatever"     #Take whatever literally, after first interpreting $, `...`, \
+'whatever'     #Take whatever absolutely literally.
+```
+
+Example:
+
+```bash
+match=`ls *.bak`        #Puts names of .bak files into shell variable match.
+echo \*                 #Echos * to screen, not all filename as in:  echo *
+echo '$1$2hello'        #Writes literally $1$2hello on screen.
+echo "$1$2hello"        #Writes value of parameters 1 and 2 and string hello.
+```
+
 #### String Concatenation
 #### String Extraction
 
 ### Condition
+```bash
+if [ -s file ]
+then
+    #such and such
+fi
+```
 
-### Loop
+### Loops
+
+```bash
+for item in [list]
+do
+    echo $item
+done
+
+for item in [list]; do
+    echo $item
+done
+```
+
+[list] can be supplied directly
+```bash
+NUMBERS="1 2 3"
+for number in `echo $NUMBERS`
+do
+    echo $number 
+done
+
+for number in $NUMBERS
+do
+    echo -n $number
+done
+
+for number in 1 2 3
+do
+    echo -n $number
+done
+
+for file in *.tar.gz
+do
+    tar -xzf $file
+done
+
+for x in `ls -tr *.log`
+do
+    cat $x >> biglog
+done
+
+
+```
+
+### Case statement
+```bash
+case "$1" in
+    a) cmd1 ;;
+    b) cmd2 ;;
+    c) cmd3 ;;
+    *) cmd4 ;;
+esac
+```
 
 
 ### Testers
 
-### File
+#### File Testers
+```bash
+-r file     #Check if file is readable.
+-w file     #Check if file is writable.
+-x file     #Check if we have execute access to file.
+-f file     #Check if file is an ordinary file (not a directory, a device file, etc.)
+-s file     #Check if file has size greater than 0.
+-d file     #Check if file is a directory.
+-e file     #Check if file exists.  Is true even if file is a directory.
+```
 
+#### String Testers
+```bash
+s1 = s2     #Check if s1 equals s2.
+s1 != s2    #Check if s1 is not equal to s2.
+-z s1       #Check if s1 has size 0.
+-n s1       #Check if s2 has nonzero size.
+s1          #Check if s1 is not the empty string.
+```
 
+#### Numbers Tester
+Note that a shell variable could contain a string that represents a number. If you want to check the numerical value use one of the following:
+
+```bash
+n1 -eq n2      #Check to see if n1 equals n2.
+n1 -ne n2      #Check to see if n1 is not equal to n2.
+n1 -lt n2      #Check to see if n1 < n2.
+n1 -le n2      #Check to see if n1 <= n2.
+n1 -gt n2      #Check to see if n1 > n2.
+n1 -ge n2      #Check to see if n1 >= n2.
+```
+
+#### Boolean operators
+
+```bash
+!     #not
+-a    #and
+-o    #or
+```
+
+Examples:
+
+```bash
+if [ $num -lt 10 -o $num -gt 100 ]
+then
+    echo "Number $num is out of range"
+elif [ ! -w $filename ]
+then
+    echo "Cannot write to $filename"
+fi
+```
