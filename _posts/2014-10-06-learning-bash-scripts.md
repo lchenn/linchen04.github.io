@@ -74,20 +74,24 @@ $var
 ${var}
 
 # It is safe to omit the curly brackets ({}) 
-# if the variable is not followed by a character that is not a letter, digit, or underscore.
+# if the variable is not followed by a character 
+# that is not a letter, digit, or underscore.
 
 Example:
-echo $UID_ #it shold be ${UID}_, otherwise, the variable name is considered at "UID_"
+echo $UID_ # it shold be ${UID}_, otherwise, 
+           # the variable name is considered at "UID_"
 ```
 
 #### Positional parameters
 Positional parameters are built-in variables, they hold the command-line arguments to the scripts when they are invoked.
 
 ```bash
-$#: #the count of parameters
-$0: #the name of the script
-$1: #the first parameter
-$*: #a single string containing all the positional parameters, separated by the 1st character in the ```IFS``` environment variable. It is like "$1 IFS $2 IFS $3 IFS ... $N"
+$#: # the count of parameters
+$0: # the name of the script
+$1: # the first parameter
+$*: # a single string containing all the positional parameters, 
+    # separated by the 1st character in the ```IFS``` environment variable. 
+    # It is like "$1 IFS $2 IFS $3 IFS ... $N"
 $@: #equals "$1" "$2" "$3" ... "$N"
 $?: #returns the exit status of the last command
 $$: #returns the processs id of the script
