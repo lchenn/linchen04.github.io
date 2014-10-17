@@ -6,6 +6,7 @@ tags: "Linux"
 ---
 
 ### Bash terminal shortcuts
+
 ```bash
 Ctrl + L # clear the terminal
 Ctrl + D # log count
@@ -21,22 +22,11 @@ Ctrl + Z # stop current command and put it into background
 ```
 
 ### Ways to execute Bash scripts
-- Execute directly, ```chmod +x``` is required, script will run in a sub-shell.
 
 ```bash
-./alice.sh
-```
-
-- Source in script, script will run in current shell.
-
-```bash
-source alice.sh
-```
-
-- Run in background, script will run in a sub-shell in the background
-
-```bash
-./alice.sh &
+./alice.sh # Execute directly, ```chmod +x``` is required, script will run in a sub-shell.
+source alice.sh #Source in script, script will run in current shell
+./alice.sh & #Run in background, script will run in a sub-shell in the background
 ```
 
 ### Functions
@@ -45,10 +35,7 @@ Two ways to define a function:
 ```bash
 function function_name {
 }
-```
-Or:
-
-```bash
+#Or
 function_name() {
 }
 ```
@@ -92,10 +79,18 @@ echo $UID_
 
 #### Positional parameters
 Positional parameters are built-in variables, they hold the command-line arguments to the scripts when they are invoked.
-- $#: the count of parameters
-- $0: the name of the script
-- $1: the first parameter
-- $*: a single string containing all the positional parameters, separated by the 1st character in the ```IFS``` environment variable. It is like "$1 IFS $2 IFS $3 IFS ... $N"
+
+```bash
+$#: #the count of parameters
+$0: #the name of the script
+$1: #the first parameter
+$*: #a single string containing all the positional parameters, separated by the 1st character in the ```IFS``` environment variable. It is like "$1 IFS $2 IFS $3 IFS ... $N"
+$@: #equals "$1" "$2" "$3" ... "$N"
+$?: #returns the exit status of the last command
+$$: #returns the processs id of the script
+$-: #returns the options given to the shell
+```
+Example:
 
 ```bash
 IFS=,
@@ -103,11 +98,6 @@ echo "$*"
 ### run it, it will output "$1,$2,$3,..."
 ```
 
-
-- $@: equals "$1" "$2" "$3" ... "$N"
-- $?: returns the exit status of the last command
-- $$: returns the processs id of the script
-- $-: returns the options given to the shell
 
 Positional parameters are read-only.
 
@@ -178,6 +168,26 @@ echo '$1$2hello'        #Writes literally $1$2hello on screen.
 echo "$1$2hello"        #Writes value of parameters 1 and 2 and string hello.
 ```
 
+### Pattern Matching
+```bash
+*              #Matches 0 or more characters.
+?              #Matches 1 character.
+[AaBbCc]       #Example: matches any 1 char from the list.
+[^RGB]         #Example: matches any 1 char not in the list.
+[a-g]          #Example: matches any 1 char from this range.
+```
+
+### Grouping
+Parentheses may be used for grouping, but must be preceded by backslashes since parentheses normally have a different meaning to the shell (namely to run a command or commands in a subshell). For example, you might use:
+
+```bash
+if test \( -r $file1 -a -r $file2 \) -o \( -r $1 -a -r $2 \)
+then
+    #do whatever
+fi
+```
+
+
 #### String Concatenation
 #### String Extraction
 
@@ -202,8 +212,9 @@ for item in [list]; do
 done
 ```
 
-[list] can be supplied directly
+[list] can be supplied multiple ways
 ```bash
+# directly
 NUMBERS="1 2 3"
 for number in `echo $NUMBERS`
 do
@@ -220,17 +231,17 @@ do
     echo -n $number
 done
 
+## list is supplied as glob pattern 
 for file in *.tar.gz
 do
     tar -xzf $file
 done
 
+## [list] is supplied using a statement
 for x in `ls -tr *.log`
 do
     cat $x >> biglog
 done
-
-
 ```
 
 ### Case statement
@@ -296,4 +307,52 @@ elif [ ! -w $filename ]
 then
     echo "Cannot write to $filename"
 fi
+```
+
+
+### Shell Arithmetic
+
+```bash
+result=`expr $1 + 2`
+result2=`expr $2 + $1 / 2`
+result=`expr $2 \* 5`               #note the \ on the * symbol
+```
+
+With bash, an expression is normally enclosed using [ ] and can use the following operators, in order of precedence:
+```bash
+* / %       #(times, divide, remainder)
++ -         #(add, subtract)
+< > <= >=   #(the obvious comparison operators)
+== !=       #(equal to, not equal to)
+&&          #(logical and)
+||          #(logical or)
+=           #(assignment)
+```
+
+### Order of Interpretation
+The bash shell carries out its various types of interpretation for each line in the following order:
+
+```bash
+brace expansion         (see a reference book)
+~ expansion             (for login ids)
+parameters              (such as $1)
+variables               (such as $var)
+command substitution    (Example:  match=`grep DNS *` )
+arithmetic              (from left to right)
+word splitting
+pathname expansion      (using *, ?, and [abc] )
+```
+
+
+### Other Shell Features
+``bash
+$var           #Value of shell variable var.
+${var}abc      #Example: value of shell variable var with string abc appended.
+#              #At start of line, indicates a comment.
+var=value      #Assign the string value to shell variable var.
+cmd1 && cmd2   #Run cmd1, then if cmd1 successful run cmd2, otherwise skip.
+cmd1 || cmd2   #Run cmd1, then if cmd1 not successful run cmd2, otherwise skip.
+cmd1; cmd2     #Do cmd1 and then cmd2.
+cmd1 & cmd2    #Do cmd1, start cmd2 without waiting for cmd1 to finish.
+(cmds)         #Run cmds (commands) in a subshell.
 ```
