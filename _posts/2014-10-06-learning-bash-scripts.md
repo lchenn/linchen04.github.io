@@ -345,10 +345,10 @@ pathname expansion      (using *, ?, and [abc] )
 
 
 ### Other Shell Features
-``bash
+
+```bash
 $var           #Value of shell variable var.
 ${var}abc      #Example: value of shell variable var with string abc appended.
-#              #At start of line, indicates a comment.
 var=value      #Assign the string value to shell variable var.
 cmd1 && cmd2   #Run cmd1, then if cmd1 successful run cmd2, otherwise skip.
 cmd1 || cmd2   #Run cmd1, then if cmd1 not successful run cmd2, otherwise skip.
@@ -356,3 +356,6 @@ cmd1; cmd2     #Do cmd1 and then cmd2.
 cmd1 & cmd2    #Do cmd1, start cmd2 without waiting for cmd1 to finish.
 (cmds)         #Run cmds (commands) in a subshell.
 ```
+
+###### References
+- A lot of content came from [here](http://www.johnstowers.co.nz/blog/pages/bash-cheat-sheet.html)
