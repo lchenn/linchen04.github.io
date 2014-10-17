@@ -67,6 +67,7 @@ Functions are different from scripts:
 
 #### Variable syntax
 Shell variables can be in two format:
+
 - $var
 - ${var}
 
