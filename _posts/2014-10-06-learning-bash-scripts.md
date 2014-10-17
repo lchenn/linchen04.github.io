@@ -319,6 +319,7 @@ result=`expr $2 \* 5`               #note the \ on the * symbol
 ```
 
 With bash, an expression is normally enclosed using [ ] and can use the following operators, in order of precedence:
+
 ```bash
 * / %       #(times, divide, remainder)
 + -         #(add, subtract)
