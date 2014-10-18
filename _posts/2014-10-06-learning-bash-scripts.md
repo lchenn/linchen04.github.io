@@ -219,10 +219,11 @@ for item in [list]; do
 done
 ```
 
-[list] can be supplied multiple ways
+***list*** can be supplied multiple ways
+
 ```bash
-# directly
-NUMBERS="1 2 3"
+
+NUMBERS="1 2 3" #directly
 for number in `echo $NUMBERS`
 do
     echo $number 
