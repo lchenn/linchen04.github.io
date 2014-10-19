@@ -17,6 +17,7 @@ egrep PATTERN FILE
 ### Grep Options
 
 Matcher selection options:
+
 ```bash
 -E, --extended-regexp # Interpret PATTERN as an extended regular expression
 ```
