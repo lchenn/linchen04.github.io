@@ -65,7 +65,6 @@ Functions are different from scripts:
 - Shell variables are named places to store data, and their values can be obtained by ```$variable_name```
 - ***Environment variables***, are conventionally named in ***all capital letters***, and their values are made known to subprocesses using ```export``` command
 
-#### Variable syntax
 Shell variables can be in two format:
 
 ```bash
@@ -80,6 +79,24 @@ ${var}
 Example:
 echo $UID_ # it shold be ${UID}_, otherwise, 
            # the variable name is considered at "UID_"
+```
+
+### Quoting
+
+```bash
+\c             #Take character c literally.
+`cmd`          #Run cmd and replace it in the line of code with its output.
+"whatever"     #Take whatever literally, after first interpreting $, `...`, \
+'whatever'     #Take whatever absolutely literally.
+```
+
+Example:
+
+```bash
+match=`ls *.bak`        #Puts names of .bak files into shell variable match.
+echo \*                 #Echos * to screen, not all filename as in:  echo *
+echo '$1$2hello'        #Writes literally $1$2hello on screen.
+echo "$1$2hello"        #Writes value of parameters 1 and 2 and string hello.
 ```
 
 #### Positional parameters
@@ -157,22 +174,27 @@ ${count:4} ### it returns footman
 ${count:4:4} ### it returns foot
 ```
 
-### Quoting
+#### String pattern operators
+
+- ${variable#pattern}: if the pattern matches the beginning of the variable's value, delete the shortest part that matches, and return the rest
+- ${variable##pattern}: if the pattern matches the beginning of the variable's value, delete the longest part that matches, and return the rest
+- ${variable%pattern}:  if the pattern matches the end of the variable's value, delete the shortest part that matches, and return the rest
+- ${variable%%pattern}: if the pattern matches the end of the variable's value, delete the longest part that matches, and return the rest
+- ${variable/pattern/string}:
+- ${variable//pattern/string}: The longest match to pattern in variable is replaced by string. In the first form, only the first match is replaced. In the second form, all matches are replaced. If the pattern begins with a #, it must match the start of the variable. If it begins with a %, it must match with the end of the variable. If string is null, the matches are deleted. If variable is @ or *, the operation is applied to each positional parameter in turn and expansion is the resultant list.
 
 ```bash
-\c             #Take character c literally.
-`cmd`          #Run cmd and replace it in the line of code with its output.
-"whatever"     #Take whatever literally, after first interpreting $, `...`, \
-'whatever'     #Take whatever absolutely literally.
+variable=/home/user/example/file.name.txt
+echo ${variable#/*/}      # returns user/example/file.name.txt
+echo ${variable##/*/}     # returns file.name.txt
+echo ${variable%.*}       # returns /home/user/example/file.name
+echo ${variable%%.*}       # returns /home/user/example/file
 ```
 
-Example:
-
+#### String length operator
 ```bash
-match=`ls *.bak`        #Puts names of .bak files into shell variable match.
-echo \*                 #Echos * to screen, not all filename as in:  echo *
-echo '$1$2hello'        #Writes literally $1$2hello on screen.
-echo "$1$2hello"        #Writes value of parameters 1 and 2 and string hello.
+variable="abcd"
+echo ${#variable}   # returns 4
 ```
 
 ### Pattern Matching
@@ -194,9 +216,21 @@ then
 fi
 ```
 
+### Command Substitution
 
-#### String Concatenation
-#### String Extraction
+It allows using the standard output of a command as if it were the value of a variable. The syntax is ```$(Unix command)```.
+
+Examples:
+
+```bash
+$(pwd)  # returns the current directory.
+$(ls $HOME) # returns the names of all files in home directory
+$(ls $(pwd)) # returns the names of all files in the current directory
+$(< alice) # returns the content of the file alice with any training newlines removed.
+```
+
+
+## Flow control
 
 ### Condition
 ```bash
