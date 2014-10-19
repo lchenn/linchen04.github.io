@@ -16,14 +16,12 @@ egrep PATTERN FILE
 
 ### Grep Options
 
-Matcher selection options:
-
+#### Matcher selection options:
 ```bash
 -E, --extended-regexp # Interpret PATTERN as an extended regular expression
 ```
 
-Matching control options:
-
+#### Matching control options:
 ```bash
 -i, --ignore-case # Ignore case (ie uppercase, lowercase letters).
 -v, --invert-match # Invert the match sense, print the non-match lines
@@ -31,27 +29,24 @@ Matching control options:
 -o, --only-matching # Print only the matched (non-empty) part
 ```
 
-File search control options:
+#### File search control options:
 ```bash
 -r, --recursive # Search the file recursively, to include subdirectories and to follow symbol links.
 ```
 
-Output control options:
-
+#### Output control options:
 ```bash
 -c, --count # Only print the number of matches
 -l, --files-with-matches # Only print the file names of matches 
 ```
 
-Output prefix control options:
-
+#### Output prefix control options:
 ```bash
 -H, --with-filename # Print the file names as the prefix out of the output
 -n, --line-number # Print the line number before each line that matches.
 ````
 
-Context line control options:
-
+#### Context line control options:
 ```bash
 -A N, --after-context=N # Print N lines of trailing context after matching lines. 
 -B N, --before-context=N # Print N lines of leading context before matching lines.
