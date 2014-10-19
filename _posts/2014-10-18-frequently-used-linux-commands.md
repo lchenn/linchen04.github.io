@@ -112,10 +112,41 @@ cat cat.txt | sort -t"," -k2,2nr
 
 
 ### tar
+Stores and extracts files from a tape or disk archive. 
 
+Syntax: ```tar Options [pathname ...]```
 
+Options:
 
-### join
+```bash
+-c, --create # Create a new archive
+-t, --list # List the contents of an archive
+-r, --append # Append files to the end of an archive  
+-x, --extract, --get # Extract files from an archive
+
+-f, --file ARCHIVE # Use archive file or device ARCHIVE
+-v, --verbose # Verbosely list files processed
+
+-j, --bzip2 # Process bzip2 file
+z, --gzip, --gunzip --ungzip # Process gz file
+```
+
+Examples:
+
+```bash
+# Create an archive file "temp.tar.gz" from directory "/home/user/temp"
+tar -cvzf temp.tar.gz /home/user/temp/ 
+
+# Create an archive file files.tar.gz from files file1 and file2
+tar -cvzf files.tar.gz file1 file2
+
+# Extract files from the file "temp.tar.gz"
+tar -xvzf temp.tar.gz
+
+# Extract a bzip2 file
+tar -xvjf temp.tar.bz2
+```
+
 
 ### cut
 Print selected parts of lines from each FILE to standard output. Options:
@@ -132,6 +163,33 @@ Print selected parts of lines from each FILE to standard output. Options:
 cut -f1,3 cat.txt ## Extact the 1st and the 3rd columns
 cut -d"," -f1,2 cat.txt ## Extract the 1st and the 3rd fields, fields are separated by ","
 ```
+
+### join
+Join lines of two files on a common field. For each pair of input lines  with identical join fields, write a line to standard output.  The default join field is the first, delimited by whitespace.  When FILE1 or FILE2 (not both) is -, read standard input. Options:
+
+```bash
+-a FILENUM # Also print unpairable lines from file FILENUM, 
+           # where FILENUM is 1 or 2, corresponding to FILE1 or FILE2
+-i, --ignore-case # Ignore differences in case when comparing fields
+-1 FIELD # Join on this FIELD of file 1
+-2 FIELD # Join on this FIELD of file 2
+-j FIELD # Equivalent to '-1 FIELD -2 FIELD'
+-t CHAR # Use CHAR as input and output field separator
+
+--check-order 
+  # Check that the input is correctly sorted, even if all input lines are pairable
+
+# Example
+
+join file1 file2 # inner join file1 and file2
+join -a 1 file1 file2 # left join file1 and file2
+join -a 2 file1 file2 # right join file1 and file2
+join -1 1 -2 3 file1 file2 
+# join file1 and file2 using the 1st field in file1, and the 3rd field in file2
+join file1 file2 | join - file3 # join file1, file2, and file3
+```
+
+
 
 ### uniq
 Filter adjacent matching lines from INPUT (or standard input), writing to OUTPUT (or standard output). Options:
