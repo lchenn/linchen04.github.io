@@ -53,7 +53,7 @@ Output prefix control options:
 Context line control options:
 
 ```bash
--A NUM, --after-context=NUM # Print  NUM  lines  of  trailing context after matching lines. 
--B NUM, --before-context=NUM # Print NUM lines of leading context before matching lines.
--C NUM, -NUM, --context=NUM # Print  NUM  lines of output context.
+-A N, --after-context=N # Print N lines of trailing context after matching lines. 
+-B N, --before-context=N # Print N lines of leading context before matching lines.
+-C N, -N, --context=N # Print N lines of output context.
 ```
