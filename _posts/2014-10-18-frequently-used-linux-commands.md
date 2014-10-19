@@ -81,6 +81,34 @@ command > a.log 2>&1 &
 -o, --output=FILE # Write result to FILE instead of standard output
 ```
 
+Sort by field options:
+
+```bash
+-t, --field-separator=SEP #Use SEP instead of non-blank to blank transition
+-k, --key=KEYDEF # Sort via a key; KEYDEF gives location and type
+    # KEYDEF  is F[.C][OPTS][,F[.C][OPTS]] for start and stop position, 
+    # where F is a field number and C a character position in the field; 
+    # both are ori‐ gin 1, and the stop position defaults to the line's end.  
+```
+
+Examples:
+
+Input, cat.txt
+```
+Solaris,10
+Linux,20
+AIX,25
+Linux,25
+Unix,30
+HPUX,100
+```
+
+```bash
+cat cat.txt | sort -n  # Sort cat.txt using numeric-sort
+cat cat.txt | sort -t"," -k2,2nr # Sort cat.txt by the second field, numeric-sort and in reversed order, fields are separated by ","
+```
+
+
 ### tar
 
 
@@ -88,12 +116,42 @@ command > a.log 2>&1 &
 ### join
 
 ### cut
+Print selected parts of lines from each FILE to standard output. Options:
 
-### curl
+```bash
+-d, --delimiter=DELIM # Use DELIM instead of TAB for field delimiter
+-f, --fields=LIST # Select only these fields;  also print any line that contains no delimiter character, unless the -s option is specified
+-s, --only-delimited # Do not print lines not containing delimiters
 
+# Examples:
+
+cut -f1,3 cat.txt ## Extact the 1st and the 3rd columns
+cut -d"," -f1,2 cat.txt ## Extract the 1st and the 3rd fields, fields are separated by ","
+```
 
 ### uniq
+Filter adjacent matching lines from INPUT (or standard input), writing to OUTPUT (or standard output). Options:
 
+```bash
+# With no options,  matching lines are merged to the first occurrence
+-c, --count # Prefix lines by the number of occurrences
+-d, --repeated # Only print duplicate lines
+-i, --ignore-case # ignore differences in case when comparing
+-u, --unique # Only print unique lines
+```
+
+Examples
+
+```bash
+cat a b | sort | uniq > c # c is the union of a and b: a | b
+cat a b | sort | uniq -b > c # c is the intersection of b: a & b
+cat a b b | sort | uniq -u > c # c is the difference of a and b: (a -b)
+cat a | sort | uniq -c # create a histogram
+```
+
+
+
+### curl
 
 
 #### Reference
