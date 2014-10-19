@@ -63,10 +63,28 @@ ssh -N -L2001:localhost:80 somemachine
 ```
 
 #### Run a command and  redirect stderr and stdout to a file
-```
+```bash
 command > a.log 2>&1 &
 ```
 
+#### Use () to create subshell
+```bash
+# do something in current dir
+(cd /some/other/dir; other-command)
+# continue in original dir
+```
+
+#### here document
+```bash
+tr a-z A-Z <<END_TEXT
+> one two three
+> uno dos tres
+> END_TEXT
+
+# output
+ONE TWO THREE
+UNO DOS TRES
+```
 
 ### sort
 
