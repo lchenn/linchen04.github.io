@@ -105,7 +105,9 @@ HPUX,100
 
 ```bash
 cat cat.txt | sort -n  # Sort cat.txt using numeric-sort
-cat cat.txt | sort -t"," -k2,2nr # Sort cat.txt by the second field, numeric-sort and in reversed order, fields are separated by ","
+cat cat.txt | sort -t"," -k2,2nr 
+        # Sort cat.txt by the second field, 
+        # numeric-sort and in reversed order, fields are separated by ","
 ```
 
 
@@ -120,7 +122,9 @@ Print selected parts of lines from each FILE to standard output. Options:
 
 ```bash
 -d, --delimiter=DELIM # Use DELIM instead of TAB for field delimiter
--f, --fields=LIST # Select only these fields;  also print any line that contains no delimiter character, unless the -s option is specified
+-f, --fields=LIST # Select only these fields; 
+                  # also print any line that contains no delimiter character, 
+                  # unless the -s option is specified
 -s, --only-delimited # Do not print lines not containing delimiters
 
 # Examples:
@@ -138,11 +142,9 @@ Filter adjacent matching lines from INPUT (or standard input), writing to OUTPUT
 -d, --repeated # Only print duplicate lines
 -i, --ignore-case # ignore differences in case when comparing
 -u, --unique # Only print unique lines
-```
 
-Examples
+# Examples
 
-```bash
 cat a b | sort | uniq > c # c is the union of a and b: a | b
 cat a b | sort | uniq -b > c # c is the intersection of b: a & b
 cat a b b | sort | uniq -u > c # c is the difference of a and b: (a -b)
