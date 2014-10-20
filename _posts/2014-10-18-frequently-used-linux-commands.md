@@ -166,6 +166,57 @@ tar -xvjf temp.tar.bz2
 ```
 
 
+### find
+Search for files in a directory hierarchy
+
+Synax: ```find [-H] [-L] [-P] [path...] [expression]```
+
+Options below path:
+
+```bash
+-P # Never follow symbolic links. This is the defualt behavious
+-L # Follow symbolic links.
+-H # Do not follow symbolic links, except while processing the command line argument.
+```
+
+Expresion options:
+
+```bash
+-maxdepth levels
+-mindepth levels
+```
+
+Find tests options
+```bash
+-name pattern # Match the file by name
+-iname pattern # Match the file by name, ignore the case
+-size [+-]n[cwbkMG] # File used n units of space. + means >, - means <
+-type # Match by type. d: directory. f: file
+```
+
+Examples:
+
+```bash
+#Find Files Using Name and Ignoring Case under /home/temp/
+find /home/temp/ -iname "TestFile"
+
+#Dispay files with 040 permission. i.e files with group read only permisison.
+find . -perm 040 -type f -exec ls -l {} \;
+
+#Find files bigger than 100M bytes
+find / -size +100M
+
+#Find all directories
+find / -type d
+
+#Find all the hidden files
+find . type f -name ".*"
+
+#Substitute space with underscore in the file name.
+find . -type f -iname “*.mp3″ -exec mv “s/ /_/g” {} \;
+```
+
+
 ### cut
 Print selected parts of lines from each FILE to standard output. Options:
 
@@ -206,8 +257,6 @@ join -1 1 -2 3 file1 file2
 # join file1 and file2 using the 1st field in file1, and the 3rd field in file2
 join file1 file2 | join - file3 # join file1, file2, and file3
 ```
-
-
 
 ### uniq
 Filter adjacent matching lines from INPUT (or standard input), writing to OUTPUT (or standard output). Options:
