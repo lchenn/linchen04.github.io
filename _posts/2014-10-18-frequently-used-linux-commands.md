@@ -276,6 +276,7 @@ cat a b b | sort | uniq -u > c # c is the difference of a and b: (a -b)
 cat a | sort | uniq -c # create a histogram
 ```
 
+### Linux control characters
 
 
 ### curl
