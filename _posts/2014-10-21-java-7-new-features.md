@@ -52,9 +52,12 @@ float pi = 3.14_15F;
 long hexBytes = 0xFF_EC_DE_5E;
 ```
 
-### Improved exception handling: Multi-Catch
+### Improved exception handling
+
+Multi-Catch
+
 ```java
-try{
+try {
     ...
 } catch (ClassCastException e) {
     //Do something
@@ -62,3 +65,67 @@ try{
     //Do some generic actions
 }
 ```
+
+More precise rethrow
+
+```java
+public void foo(String bar) throws FirstException, SecondExcepiton {
+    try {    
+	//code that may throw both FirstException and SecondException
+    } catch (Exception e) {
+	throw e;
+	//this doesn't work prior to Java 7
+    }
+}
+```
+
+### Java NIO 2
+#### Files, Paths, Path, FileSystem
+- Class java.nio.file.Paths
+- Interface  java.nio.file.Path
+- Class java.nio.file.Files
+- Class java.nio.file.FileSystem
+
+Use ```Paths``` to get a ```Path```. Use ```Files``` to do stuff.
+
+```java
+Path src = Paths.get(“/home/fred/readme.txt”);
+Path dst = Paths.get(“/home/fred/copy_readme.txt”);
+Files.copy(src, dst, 
+	StandardCopyOption.COPY_ATTRIBUTES,
+	StandardCopyOption.REPLACE_EXISTING);
+```
+
+Use ```DirectoryStream``` to support directory operations:
+- Implements Iterable and Closeable interfaces
+- Built-in supoort for glob, regex and custom filters
+
+```java
+Path srcPath = Path.get("/home/user/src");
+try (DirectoryStream<Path> dir = srcPath.newDirectoryStream("*.java")) {
+    for (Path file: dir) {
+	//do something to the file
+    }
+}
+```
+
+Use ```FileVisitor``` to walk through a File tree.
+
+```java
+    Path startingDir = Paths.get("/home/user/src");
+    PrintFiles printFileVisitor = new PrintFiles();
+    Files.walFileTree(stringDir, printFileVisitor);
+```
+
+### JDBC 4.1
+Try-with-resources statement to automatically close resource of type Connection, ResultSet, and Statement
+
+```java
+try (Statement statement = conn.createStatement()) {
+    // ...
+}
+```
+
+
+##### Reference
+- Examples came from [here](http://www.slideshare.net/boulderjug/55-things-in-java-7)
