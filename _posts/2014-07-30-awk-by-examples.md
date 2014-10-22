@@ -7,7 +7,6 @@ tags: "Linux"
 
 ### Built-in variables
 
-
 | Variable | Description   |
 |----------|---------------|
 | $0	| Current Line |
