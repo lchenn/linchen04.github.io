@@ -31,9 +31,12 @@ Preconditions are used to check some conditions before executing some commands. 
 ```
 
 Most of the methods has three signatures. "%" is used to specify a parameter in the template for the error message.
+
+```java
 - checkXxx(T)
 - checkXxx(T, String message)
 - checkXxx(T, String messageTemplate, Object...parameters)
+```
 
 ### Strings Classes
 
