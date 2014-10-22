@@ -151,6 +151,7 @@ Interval operations:
 
 enclose(Range):  If the bounds of the inner range do not extend outside the bounds of the outer range. 
 isConnected(Range):  Tests if these ranges are connected.
+
 ```java
 Range.closed(3, 5).isConnected(Range.open(5, 10)); // returns true????
 Range.closed(0, 9).isConnected(Range.closed(3, 4)); // returns true
@@ -160,6 +161,7 @@ Range.closed(1, 5).isConnected(Range.closed(6, 10)); // returns false
 ```
 
 intersection(Range): Returns the maximal range enclosed by both this range and other. if it doesn't exist,  throws an IllegalArgumentException.
+
 ```java
 Range.closed(3, 5).intersection(Range.open(5, 10)); // returns (5, 5]
 Range.closed(0, 9).intersection(Range.closed(3, 4)); // returns [3, 4]
@@ -169,6 +171,7 @@ Range.closed(1, 5).intersection(Range.closed(6, 10)); // throws IAE
 ```
                     
 span(Range): Returns the minimal range that encloses both this range and other.  If the ranges are both connected, this is their union.
+
 ```java
 Range.closed(3, 5).span(Range.open(5, 10)); // returns [3, 10)
 Range.closed(0, 9).span(Range.closed(3, 4)); // returns [0, 9]
