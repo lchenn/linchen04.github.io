@@ -94,6 +94,7 @@ CaseFormat.UPPER_UNDERSCORE.TO(CaseFormat.LOWER_CAMEL, "CONSTANT_NAME");
 ```
 
 The predefined CaseFormats are:
+
 ```java
 - LOWER_CAMEL // lowserCamel
 - LOWER_HYPHEN // lower-hygen
