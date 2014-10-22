@@ -7,7 +7,34 @@ tags: "Java"
 
 I have been using Guava for while, mainingly using ```Precondiations``` for agument checking and ```Objects``` for build ```hashCode()``` and ```equals()```. Seems it is a good idea to learn and use more utitlity functions in the wonderful library.
 
+### Basic Utilities
+
+#### Objects
+
+```java
+Objects.equal()
+Objects.toStringHelper
+Objects.firstNonNull
+Objects.hashCode
+ComparisonChain.start()
+```
+#### Preconditions
+
+
 ### Strings Classes
+
+#### Strings
+Strings has been simplified, now it contains a few String null/empty check and operate method, and a few padding method.
+
+```java
+- nullToEmpty(String) // if it's null, return empty;
+- emptyToNull(String) // if it's empty return null
+- isNullOrEmpty(String) // test if empty or null
+
+- paddingStart(String, int minLength, char padChar)
+- padEnd(String, int minLength, padChar)
+- repeat(String, int count)
+```
 
 #### Charsets
 
@@ -103,8 +130,9 @@ The predefined CaseFormats are:
 - UPPER_UNDERSCORE //UPPER_UNDERSCORE
 ```
 
+### Collections
 
-### Range
+#### Range
 Defines boundaries around a continuous span values of of some ```Comparable``` types.
 
 Static methods to create Ranges.
@@ -179,3 +207,33 @@ Range.closed(0, 5).span(Range.closed(3, 9)); // returns [0, 9]
 Range.open(3, 5).span(Range.open(5, 10)); // returns (3, 10)
 Range.closed(1, 5).span(Range.closed(6, 10)); // returns [1, 10]
 ```
+
+#### Multiset
+
+#### Multimap
+
+#### Bimap
+
+#### Table
+
+#### Immutables
+
+
+### Functional Programming
+
+#### Predicate
+#### Function
+
+### Cache
+
+LoadingCache
+CacheBuilder
+CacheLoader
+
+### Working with Files
+
+
+
+### Eventbus
+
+
