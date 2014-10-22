@@ -7,7 +7,51 @@ tags: "Java"
 
 I have been using Guava for while, mainingly using ```Precondiations``` for agument checking and ```Objects``` for build ```hashCode()``` and ```equals()```. Seems it is a good idea to learn and use more utitlity functions in the wonderful library.
 
+### Basic Utilities
+
+#### Objects
+
+```java
+Objects.equal()
+Objects.toStringHelper
+Objects.firstNonNull
+Objects.hashCode
+ComparisonChain.start()
+```
+#### Preconditions
+
+Preconditions are used to check some conditions before executing some commands. If the conditions are not met, an Exception will be thrown.
+
+```java
+- checkArgument(boolean) // throws IllegalArgumentException
+- checkNotNull(T) // NullPointerException, if T is not null, return the value.
+- checkState(boolean) // throws IllegalStateException
+- checkElementIndex(int index, int size) // IndexOutOfBoundsException; returns index.
+- checkPositionIndex(int index, int size) // IndexOutOfBoundsException; returns index.
+```
+
+Most of the methods has three signatures. "%" is used to specify a parameter in the template for the error message.
+
+```java
+- checkXxx(T)
+- checkXxx(T, String message)
+- checkXxx(T, String messageTemplate, Object...parameters)
+```
+
 ### Strings Classes
+
+#### Strings
+Strings has been simplified, now it contains a few String null/empty check and operate method, and a few padding method.
+
+```java
+- nullToEmpty(String) // if it's null, return empty;
+- emptyToNull(String) // if it's empty return null
+- isNullOrEmpty(String) // test if empty or null
+//
+- paddingStart(String, int minLength, char padChar)
+- padEnd(String, int minLength, padChar)
+- repeat(String, int count)
+```
 
 #### Charsets
 
@@ -21,7 +65,7 @@ bytes = string.getByte(StandardCharsets.UTF_8);
 
 #### CharMatcher
 - Given a char, it returns true or false
-- Implements ```Predicator```
+- Implements ```Predicate```
 
 ```java
 // remove control characters from the input string
@@ -102,5 +146,111 @@ The predefined CaseFormats are:
 - UPPER_CAMEL //UpperCamel
 - UPPER_UNDERSCORE //UPPER_UNDERSCORE
 ```
+
+### Collections
+
+#### Range
+Defines boundaries around a continuous span values of of some ```Comparable``` types.
+
+Static methods to create Ranges.
+
+```java
+- open(C,C) // (a..b)
+- closed(C, C) //  [a..b]
+- closedOpen(C, C) // [a..b)
+- openClosed(C, C) // (a..b]
+- greaterThan(C) // (a..+∞)
+- atLeast(C) // [a..++∞)
+- lessThan(C) // (-∞..b)
+- atMost(C) // (-∞..b]
+- all() // (-∞..+∞)
+```
+
+The fundamental operation of a Range is its contains(C)
+
+```java
+Range.closed(1, 3).contains(2); // returns true
+Range.closed(1, 4).containsAll(Ints.asList(1, 2, 3)); // returns true
+```
+
+Other operations:
+
+```java
+// Query operations
+- isEmpty() // test if the range is empty, such as [a, a)
+- hasLowerBound()
+- hasUpperBound()
+- lowerBoundType()
+- upperBoundType()
+- LowerEndpoint()
+// Examples
+Range.open(4, 4).isEmpty(); // Range.open throws IllegalArgumentException
+Range.closed(3, 10).lowerEndpoint(); // returns 3
+Range.open(3, 10).lowerEndpoint(); // returns 3
+Range.closed(3, 10).lowerBoundType(); // returns CLOSED
+Range.open(3, 10).upperBoundType(); // returns OPEN
+```
+
+Interval operations:
+
+
+enclose(Range):  If the bounds of the inner range do not extend outside the bounds of the outer range. 
+isConnected(Range):  Tests if these ranges are connected.
+
+```java
+Range.closed(3, 5).isConnected(Range.open(5, 10)); // returns true????
+Range.closed(0, 9).isConnected(Range.closed(3, 4)); // returns true
+Range.closed(0, 5).isConnected(Range.closed(3, 9)); // returns true
+Range.open(3, 5).isConnected(Range.open(5, 10)); // returns false
+Range.closed(1, 5).isConnected(Range.closed(6, 10)); // returns false
+```
+
+intersection(Range): Returns the maximal range enclosed by both this range and other. if it doesn't exist,  throws an IllegalArgumentException.
+
+```java
+Range.closed(3, 5).intersection(Range.open(5, 10)); // returns (5, 5]
+Range.closed(0, 9).intersection(Range.closed(3, 4)); // returns [3, 4]
+Range.closed(0, 5).intersection(Range.closed(3, 9)); // returns [3, 5]
+Range.open(3, 5).intersection(Range.open(5, 10)); // throws IAE
+Range.closed(1, 5).intersection(Range.closed(6, 10)); // throws IAE
+```
+                    
+span(Range): Returns the minimal range that encloses both this range and other.  If the ranges are both connected, this is their union.
+
+```java
+Range.closed(3, 5).span(Range.open(5, 10)); // returns [3, 10)
+Range.closed(0, 9).span(Range.closed(3, 4)); // returns [0, 9]
+Range.closed(0, 5).span(Range.closed(3, 9)); // returns [0, 9]
+Range.open(3, 5).span(Range.open(5, 10)); // returns (3, 10)
+Range.closed(1, 5).span(Range.closed(6, 10)); // returns [1, 10]
+```
+
+#### Multiset
+
+#### Multimap
+
+#### Bimap
+
+#### Table
+
+#### Immutables
+
+
+### Functional Programming
+
+#### Predicate
+#### Function
+
+### Cache
+
+LoadingCache
+CacheBuilder
+CacheLoader
+
+### Working with Files
+
+
+
+### Eventbus
 
 
