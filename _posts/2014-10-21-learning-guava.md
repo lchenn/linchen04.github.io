@@ -88,7 +88,7 @@ Options to modify a Splitter.
 #### CaseFormat
 Utility class to convert ASCII cases.
 
-``java
+```java
 // Will return "constantName"
 CaseFormat.UPPER_UNDERSCORE.TO(CaseFormat.LOWER_CAMEL, "CONSTANT_NAME");
 ```
