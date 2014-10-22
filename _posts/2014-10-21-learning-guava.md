@@ -20,6 +20,20 @@ ComparisonChain.start()
 ```
 #### Preconditions
 
+Preconditions are used to check some conditions before executing some commands. If the conditions are not met, an Exception will be thrown.
+
+```java
+- checkArgument(boolean) // throws IllegalArgumentException
+- checkNotNull(T) // NullPointerException, if T is not null, return the value.
+- checkState(boolean) // throws IllegalStateException
+- checkElementIndex(int index, int size) // IndexOutOfBoundsException; returns index.
+- checkPositionIndex(int index, int size) // IndexOutOfBoundsException; returns index.
+```
+
+Most of the methods has three signatures. "%" is used to specify a parameter in the template for the error message.
+- checkXxx(T)
+- checkXxx(T, String message)
+- checkXxx(T, String messageTemplate, Object...parameters)
 
 ### Strings Classes
 
@@ -30,7 +44,7 @@ Strings has been simplified, now it contains a few String null/empty check and o
 - nullToEmpty(String) // if it's null, return empty;
 - emptyToNull(String) // if it's empty return null
 - isNullOrEmpty(String) // test if empty or null
-
+//
 - paddingStart(String, int minLength, char padChar)
 - padEnd(String, int minLength, padChar)
 - repeat(String, int count)
@@ -48,7 +62,7 @@ bytes = string.getByte(StandardCharsets.UTF_8);
 
 #### CharMatcher
 - Given a char, it returns true or false
-- Implements ```Predicator```
+- Implements ```Predicate```
 
 ```java
 // remove control characters from the input string
