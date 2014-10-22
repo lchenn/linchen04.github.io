@@ -251,6 +251,143 @@ CacheLoader
 
 
 
-### Eventbus
+### EventBus
+
+EventBus allows publish-subscribe-style communication between components without requiring the components to explicitly register with one another (and thus be aware of each other). It is designed exclusively to replace traditional Java in-process event distribution using explicit registration. It is not a general-purpose publish-subscribe system, nor is it intended for interprocess communication.
+
+Glossary, came from the (wiki)[https://code.google.com/p/guava-libraries/wiki/EventBusExplained]
+
+| Event | Any object that may be posted to a bus. |
+| Subscribing | The act of registering a listener with an EventBus, so that its handler methods will receive events. |
+| Listener | An object that wishes to receive events, by exposing handler methods. |
+| Handler method | A public method that the EventBus should use to deliver posted events. Handler methods are marked by the Subscribe annotation. |
+| Posting an event | Making the event available to any listeners through the EventBus. |
+
+
+An example is below.
+
+```java
+public class EventBusExample {
+
+    /**
+     * An Event, can be any class
+     */
+    public static class EventA {
+        public String toString() {
+            return "Event A";
+        }
+    }
+
+    /**
+     * Another Event, can be any class
+     */
+    public static class EventB {
+        public String toString() {
+            return "Event B";
+        }
+    }
+
+    public static class EventC {
+        public String toString() {
+            return "Event C";
+        }
+    }
+
+
+    public static class EventD {
+        public String toString() {
+            return "Event D";
+        }
+    }
+
+
+    public static class EventE {
+        public String toString() {
+            return "Event E";
+        }
+    }
+
+    /**
+     * Listener in the Glossary
+     */
+    public static class EventListener {
+
+        /**
+         * Subscribing in the Glossary, this is also a Handler method
+         */
+        @Subscribe
+        public void onEvent(EventA e) {
+            System.out.println("I subscribed EventA, I received: :" + e);
+        }
+
+        @Subscribe
+        public void onEvent(EventB e) {
+            System.out.println("I subscribed EventB, I received: :" + e);
+        }
+
+        /**
+         * AllowConcurrentEvents marks an event handling method as being thread-safe. It indicates that EventBus may
+         * invoke the event handler simultaneously from multiple threads.
+         */
+        @Subscribe
+        @AllowConcurrentEvents
+        public void onEvent(EventC e) throws InterruptedException {
+            String name = Thread.currentThread().getName();
+            System.out.format("%s sleep for 1000 ms%n", name);
+            Thread.sleep(1000);
+            System.out.println(name + "I subscribed EventC, I received: :" + e);
+            System.out.format("%s sleep done%n", name);
+            System.out.println(e.toString());
+        }
+
+        @Subscribe
+        public void onEvent(EventD e) throws InterruptedException {
+            String name = Thread.currentThread().getName();
+            System.out.format("%s sleep for 1000 ms%n", name);
+            Thread.sleep(1000);
+            System.out.println(name + "I subscribed EventD, I received: :" + e);
+            System.out.format("%s sleep done%n", name);
+        }
+
+
+        /**
+         * DeadEvent is used to hand all the Events which are posted to this EventListener
+         */
+        @Subscribe
+        public void onEvent(DeadEvent de) {
+            System.out.println("Got a DeadEvent" + de.getEvent());
+        }
+
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        EventBus eb = new EventBus();
+        eb.register(new EventListener());
+
+        // Posting an event
+        System.out.println("----------Trigger EventA---------");
+        eb.post(new EventA());
+        System.out.println("----------Trigger EventB---------");
+        eb.post(new EventB());
+        System.out.println("----------Trigger EventE---------");
+        eb.post(new EventE());
+
+
+        System.out.println("----------Trigger EventC---------");
+        ExecutorService threadPool = Executors.newCachedThreadPool();
+        eb = new AsyncEventBus(threadPool);
+        eb.register(new EventListener());
+        for (int i = 0; i < 20; i++) {
+            eb.post(new EventC());
+        }
+        System.out.println("----------Trigger EventD---------");
+        for (int i = 0; i < 20; i++) {
+            eb.post(new EventD());
+        }
+        Thread.sleep(2000);
+        threadPool.shutdown();
+    }
+}
+```
 
 
