@@ -20,14 +20,9 @@ Objects.equal(null, null); // returns true
 
 // Objects.toStringHelper
 // Returns "ClassName{x=1}"
-Objects.toStringHelper(this)
-    .add("x", 1)
-    .toString();
-
+Objects.toStringHelper(this).add("x", 1).toString();
 // Returns "MyObject{x=1}"
-Objects.toStringHelper("MyObject")
-    .add("x", 1)
-    .toString();
+Objects.toStringHelper("MyObject").add("x", 1).toString();
 
 // Returns the first of two given parameters that is not null,
 // if either is, or otherwise throws a NullPointerException.
@@ -265,17 +260,92 @@ Range.closed(1, 5).span(Range.closed(6, 10)); // returns [1, 10]
 
 ### Functional Programming
 
-#### Predicate
-#### Function
+***Function*** and ***Predicate*** are two main classes to use functional programing with Guava.
+
+***Function*** determines an output value based on an input value. The definition of Function is:
+
+```java
+public interface Function<F, T> {
+  T apply(F input);
+}
+```
+
+***Predicate*** determines a true or false value for a given input. The definition of Predicate is:
+
+```java
+public interface Predicate<T> {
+  boolean apply(T input);
+}
+```
+
+***Function*** and ***Predicate***  generally iii expected, but not absolutely required, to have the following properties:
+- Its execution does not cause any observable side effects.
+- The computation is consistent with equals; that is, Objects.equal(a, b) implies that apply(a) == apply(b).
+
+***Functions*** is mainly used to transform collections, commonly used functions include:
+
+| Collection type | Transform method |
+|---------------|------------------|
+| Iterable      | Iterables.transform(Iterable, Function) |
+| Iterator	    | Iterators.transform(Iterator, Function)  |
+| Collection	| Collections2.transform(Collection, Function)  |
+| List          | Lists.transform(List, Function)  |
+| Map           | Maps.transformValues(Map, Function) |
+| Map           | Maps.transformEntries(Map, EntryTransformer) |
+| SortedMap     | Maps.transformValues(SortedMap, Function)  |
+| SortedMap     | Maps.transformEntries(SortedMap, EntryTransformer)  |
+| Multimap      | Multimaps.transformValues(Multimap, Function)  |
+| Multimap      | Multimaps.transformEntries(Multimap, EntryTransformer)  |
+| ListMultimap  | Multimaps.transformValues(ListMultimap, Function)  |
+| ListMultimap  | Multimaps.transformEntries(ListMultimap, EntryTransformer)  |
+| Table         | Tables.transformValues(Table, Function)  |
+
+***Predicate*** is mainly used to filter collections, all the Guava filters return views.
+
+| Collection type | Filter method |
+|---------------|------------------|
+| Iterable      | Iterables.filter(Iterable, Predicate) |
+| Iterator      | Iterators.filter(Iterator, Predicate) |
+| Collection    | Collections2.filter(Collection, Predicate) |
+| Set           | Sets.filter(Set, Predicate)   |
+| SortedSet     | Sets.filter(SortedSet, Predicate) |
+| Map           | Maps.filterKeys(Map, Predicate)   |
+| Map           | Maps.filterValues(Map, Predicate) |
+| Map           | Maps.filterEntries(Map, Predicate) |
+| SortedMap     | Maps.filterKeys(SortedMap, Predicate) |
+| SortedMap     | Maps.filterValues(SortedMap, Predicate) |
+| SortedMap     | Maps.filterEntries(SortedMap, Predicate) |
+| Multimap      | Multimaps.filterKeys(Multimap, Predicate) |
+| Multimap      | Multimaps.filterValues(Multimap, Predicate) |
+| Multimap      | Multimaps.filterEntries(Multimap, Predicate) |
+
+
+Guava also provides a number of additional utilities to manipulate with predicates.
+
+```java
+- boolean all(Iterable, Predicate)
+- boolean any(Iterable, Predicate)
+- T find(Iterable, Predicate)
+- Optional<T> tryFind(Iterable, Predicate)
+- indexOf(Iterable, Predicate)
+- removeIf(Iterable, Predicate)
+```
+
+
 
 ### Cache
 
-LoadingCache
-CacheBuilder
-CacheLoader
+### I/O
 
-### Working with Files
+***Files*** class provides several convenient utilities.
 
+```java
+createParentDirs(File)  // Creates necessary but nonexistent parent directories of the file.
+getFileExtension(String) // Gets the file extension of the file described by the path.
+getNameWithoutExtension(String) // Gets the name of the file with its extension removed
+simplifyPath(String) // Cleans up the path. Not always consistent with your filesystem; test carefully!
+fileTreeTraverser() // Returns a TreeTraverser that can traverse file trees
+```
 
 
 ### EventBus
@@ -306,7 +376,6 @@ public class EventBusExample {
             return "Event A";
         }
     }
-
     /**
      * Another Event, can be any class
      */
@@ -315,7 +384,6 @@ public class EventBusExample {
             return "Event B";
         }
     }
-
     /**
      * A different event for multi-thread
      */
@@ -324,14 +392,11 @@ public class EventBusExample {
             return "Event C";
         }
     }
-
-
     public static class EventD {
         public String toString() {
             return "Event D";
         }
     }
-
     /**
      * The event which are not handled in this example.
      */
