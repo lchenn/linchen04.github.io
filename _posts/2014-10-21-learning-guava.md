@@ -331,10 +331,6 @@ Guava also provides a number of additional utilities to manipulate with predicat
 - removeIf(Iterable, Predicate)
 ```
 
-
-
-### Cache
-
 ### I/O
 
 ***Files*** class provides several convenient utilities.
@@ -421,6 +417,32 @@ HashCode hash = Files.asByteSource(file).hash(Hashing.sha1());
 Resources.asByteSource(url).copyTo(Files.asByteSink(file));
 ```
 
+### Hashing
+
+Guava provides a list of hash functions to do the hash, including md5, sha1, sha256, sha512. The example using it.
+
+```java
+HashCode hc = Hashing.md5().newHasher()
+       .putLong(id)
+       .putString(name, Charsets.UTF_8)
+       .putObject(person, personFunnel)
+       .hash();
+```
+
+Guava alos provides a ***BloomFilter*** implementation.
+
+```java
+BloomFilter<Person> friends = BloomFilter.create(personFunnel, 500, 0.01);
+for(Person friend : friendsList) {
+  friends.put(friend);
+}
+// much later
+if (friends.mightContain(dude)) {
+  // the probability that dude reached this place if he isn't a friend is 1%
+  // we might, for example, start asynchronously loading things
+  // for dude while we do a more expensive exact check
+}
+```
 
 ### EventBus
 
