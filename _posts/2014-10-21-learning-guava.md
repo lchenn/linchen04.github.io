@@ -12,12 +12,38 @@ I have been using Guava for while, mainingly using ```Precondiations``` for agum
 #### Objects
 
 ```java
-Objects.equal()
-Objects.toStringHelper
-Objects.firstNonNull
-Objects.hashCode
+// Objects.equal()
+Objects.equal("a", "a"); // returns true
+Objects.equal(null, "a"); // returns false
+Objects.equal("a", null); // returns false
+Objects.equal(null, null); // returns true
+
+// Objects.toStringHelper
+// Returns "ClassName{x=1}"
+Objects.toStringHelper(this)
+    .add("x", 1)
+    .toString();
+
+// Returns "MyObject{x=1}"
+Objects.toStringHelper("MyObject")
+    .add("x", 1)
+    .toString();
+
+// Returns the first of two given parameters that is not null, if either is, or otherwise throws a NullPointerException.
+Objects.firstNonNull(string1, string2)
+
+// Implement Objects.hashCode
+Objects.hashCode(field1, field2, ..., fieldn)
+
+// Implement Comparable
 ComparisonChain.start()
+    .compare(this.aString, that.aString)
+    .compare(this.anInt, that.anInt)
+    .compare(this.anEnum, that.anEnum, Ordering.natural().nullsLast())
+    .result();
 ```
+
+
 #### Preconditions
 
 Preconditions are used to check some conditions before executing some commands. If the conditions are not met, an Exception will be thrown.
