@@ -29,7 +29,8 @@ Objects.toStringHelper("MyObject")
     .add("x", 1)
     .toString();
 
-// Returns the first of two given parameters that is not null, if either is, or otherwise throws a NullPointerException.
+// Returns the first of two given parameters that is not null,
+// if either is, or otherwise throws a NullPointerException.
 Objects.firstNonNull(string1, string2)
 
 // Implement Objects.hashCode
