@@ -287,6 +287,9 @@ public class EventBusExample {
         }
     }
 
+    /**
+     * A different event for multi-thread
+     */
     public static class EventC {
         public String toString() {
             return "Event C";
@@ -300,7 +303,9 @@ public class EventBusExample {
         }
     }
 
-
+    /**
+     * The event which are not handled in this example.
+     */
     public static class EventE {
         public String toString() {
             return "Event E";
@@ -326,8 +331,9 @@ public class EventBusExample {
         }
 
         /**
-         * AllowConcurrentEvents marks an event handling method as being thread-safe. It indicates that EventBus may
-         * invoke the event handler simultaneously from multiple threads.
+         * AllowConcurrentEvents marks an event handling method as being thread-safe.
+         * It indicates that EventBus may invoke the event
+         * handler simultaneously from multiple threads.
          */
         @Subscribe
         @AllowConcurrentEvents
@@ -349,9 +355,10 @@ public class EventBusExample {
             System.out.format("%s sleep done%n", name);
         }
 
-
         /**
-         * DeadEvent is used to hand all the Events which are posted to this EventListener
+         * DeadEvent is used to hand all the Events
+         * which are posted to this EventListener,
+         * but they are handled by other Subscribe methods.
          */
         @Subscribe
         public void onEvent(DeadEvent de) {
@@ -367,12 +374,13 @@ public class EventBusExample {
         // Posting an event
         System.out.println("----------Trigger EventA---------");
         eb.post(new EventA());
+        // Posting a different event
         System.out.println("----------Trigger EventB---------");
         eb.post(new EventB());
+        // Posting a DeadEvent
         System.out.println("----------Trigger EventE---------");
         eb.post(new EventE());
-
-
+        // Multi-thread event
         System.out.println("----------Trigger EventC---------");
         ExecutorService threadPool = Executors.newCachedThreadPool();
         eb = new AsyncEventBus(threadPool);
