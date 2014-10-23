@@ -340,11 +340,85 @@ Guava also provides a number of additional utilities to manipulate with predicat
 ***Files*** class provides several convenient utilities.
 
 ```java
-createParentDirs(File)  // Creates necessary but nonexistent parent directories of the file.
-getFileExtension(String) // Gets the file extension of the file described by the path.
-getNameWithoutExtension(String) // Gets the name of the file with its extension removed
-simplifyPath(String) // Cleans up the path. Not always consistent with your filesystem; test carefully!
-fileTreeTraverser() // Returns a TreeTraverser that can traverse file trees
+- createParentDirs(File) //Creates necessary but nonexistent parent directories.
+- getFileExtension(String) // Gets the file extension of the file described by the path.
+- getNameWithoutExtension(String) // Gets the name of the file with its extension removed
+- simplifyPath(String) // Cleans up the path.
+- fileTreeTraverser() // Returns a TreeTraverser that can traverse file trees
+- readLines(File, Charset) // Read a file into file with the specified charset
+```
+
+Guava uses Source and Sink to read and write bytes/Chars. ByteSource and ByteSink are for reading and writing Bytes, CharSource and CharSink are for reading and writing Chars.
+
+The methods to create Source and Sink.
+
+```java
+// Create ByteSource
+- Files.asByteSource(File)
+- Resources.asByteSource(URL)
+- ByteSource.wrap(byte[])
+- ByteSource.concat(ByteSource...)
+- ByteSource.slice(long, long)
+
+// Create ByteSink
+- Files.asByteSink(File, FileWriteMode...)
+
+// Create CharSource
+- Files.asCharSource(File, Charset)
+- Resources.asCharSource(URL, Charset)
+- CharSource.wrap(CharSequence)
+- CharSource.concat(CharSource...)
+- ByteSource.asCharSource(Charset)
+
+// Create CharSink
+- Files.asCharSink(File, Charset, FileWriteMode...)
+- ByteSink.asCharSink(Charset)
+```
+
+Once a Source or a Sink is created, it can be used to read or write bytes or chars.
+
+```java
+// read using ByteSource
+- byte[] read()
+- boolean isEmpty()
+- HashCode hash(HashFunction)
+
+// read using CharSource
+- String read()
+- ImmutableList<String> readLines()
+- long copyTo(CharSink)
+- boolean isEmpty()
+
+// write using ByteSink
+- void write(byte[])
+- long writeFrom(InputStream)
+
+// write using CharSink
+- void write(CharSequence)
+- long writeFrom(Readable)
+- void writeLines(Iterable<? extends CharSequence>)
+- void writeLines(Iterable<? extends CharSequence>, String)
+
+```
+
+Examples of using Sink and Source.
+
+```java
+// Read the lines of a UTF-8 text file
+ImmutableList<String> lines = Files.asCharSource(file, Charsets.UTF_8).readLines();
+
+// Count distinct word occurrences in a file
+Multiset<String> wordOccurrences = HashMultiset.create(
+  Splitter.on(CharMatcher.WHITESPACE)
+    .trimResults()
+    .omitEmptyStrings()
+    .split(Files.asCharSource(file, Charsets.UTF_8).read()));
+
+// SHA-1 a file
+HashCode hash = Files.asByteSource(file).hash(Hashing.sha1());
+
+// Copy the data from a URL to a file
+Resources.asByteSource(url).copyTo(Files.asByteSink(file));
 ```
 
 
