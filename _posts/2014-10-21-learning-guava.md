@@ -257,6 +257,8 @@ EventBus allows publish-subscribe-style communication between components without
 
 Glossary, came from the (wiki)[https://code.google.com/p/guava-libraries/wiki/EventBusExplained]
 
+| Name  | Description |
+|-------|-------------|
 | Event | Any object that may be posted to a bus. |
 | Subscribing | The act of registering a listener with an EventBus, so that its handler methods will receive events. |
 | Listener | An object that wishes to receive events, by exposing handler methods. |
