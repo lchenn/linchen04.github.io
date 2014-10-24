@@ -5,7 +5,7 @@ categories:
 tags: "Linux"
 ---
 
-### Git basic
+### Git basics
 
 Basic concepts
 
