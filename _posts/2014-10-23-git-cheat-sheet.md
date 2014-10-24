@@ -52,7 +52,10 @@ $ git tag -d <tag>
 # Create a branch
 $ git branch <branch>
 # Publish the branch
-$ git push origin <branch>
+$ git push <remote> <branch>
+# Push all the local branches to remote
+$ git push <remote> --all
+
 # Remove a git branch
 $ git branch -d <branch>
 #
@@ -64,6 +67,36 @@ $ git push origin :refs/tags/<tag>
 $ git push origin :refs/heads/<branch>
 ```
 
+### Show the log
+```bash
+# Condense each commit to a single line
+$ git log --oneline
+# Only display commits that have the specific file.
+$ git log -- <file>
+# Show full diff of each commit
+$ git log -p
+# Search for commits by a particular author.
+$ git log --author="<pattern>"
+# Show commits that occur between <since> and <until>
+$ git log <since>..<until>
+# Draw text based graph of commits
+$ git log --graph --decorate
+```
+
+### Git reset
+```bash
+# Reset staging area to match most recent commit, but leave the working directory unchanged.
+$ git reset
+# Reset staging area and working directory to match most recent commit
+#  and overwrites all changes in the working directory.
+$ git reset --hard
+# Move the current branch tip backward to <commit>,
+# reset the staging area to match, but leave the working directory alone.
+$ git reset --hard <commit>
+# Same as previous, but resets both the staging area & working directory to match.
+# Deletes uncommitted changes, and all commits after <commit>.
+$ git reset --hard <commit>
+```
 
 ### Working with remote
 ```bash
