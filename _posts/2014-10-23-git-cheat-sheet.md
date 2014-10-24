@@ -46,6 +46,14 @@ $ git push <remote> --all
 ```
 
 ### Rebase
+```bash
+# Interactively rebase from a commit
+$ git rebase -i <commit>
+
+# Delete a commit:
+# Start from the <commit>~1, and delete the line of that commit
+$ git rebase -i <commit>~1
+```
 
 ### Tag and Branch
 ```bash
