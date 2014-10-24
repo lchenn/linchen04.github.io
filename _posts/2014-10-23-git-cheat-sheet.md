@@ -8,6 +8,7 @@ tags: "Linux"
 ### Git basic
 
 Basic concepts
+
 ```bash
 master # default development branch
 origin # default upstream repository
@@ -20,6 +21,7 @@ HEAD~4 # The great-great grandparent of HEAD
 ```
 
 Basic operations
+
 ```bash
 # File changed in working directory
 $ git status
