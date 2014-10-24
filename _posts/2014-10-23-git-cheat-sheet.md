@@ -5,22 +5,73 @@ categories:
 tags: "Linux"
 ---
 
-### Check differences
+### Git basic
 
-
-### Basic operations
-
+Basic concepts
 ```bash
+master # default development branch
+origin # default upstream repository
+HEAD  # Current branch
+HEAD^ # Parent of HEAD
+HEAD~4 # The great-great grandparent of HEAD
+<commit>~1 # The previous commit of <commit>
+<commit>~2 # The grandparent of <commit>
+<commit>  # The first 7 chars can be used to identify a commit
+```
+
+Basic operations
+```bash
+# File changed in working directory
+$ git status
+# Who changed what at when in a file
+$ git blame <file>
+# Checkout a file from a commit
+$ git checkout <commit> <file>
+# Checking in a file
+$ git commit -a -m "<commit message>"
+
 # Unstage a file
 $ git reset HEAD file_path
-
 # Checkout a remote branch
 $ git fetch
-$ git checkout test
-
+$ git checkout <branch>
+# Checkout a branch and switch it immediately
+$ git checkout -b [branch]
 # Checkout a remote tag to a branch
 $ git fetch
-$ git checkout -b branch_name tags/tagname
+$ git checkout -b <branch> tags/<tag>
+```
+
+### Config the Git
+```bash
+# Sets the name you want attached to your commit transactions
+$ git config --global user.name "<name>"
+# Sets the email you want attached to your commit transactions
+$ git config --global user.email "[email address]"
+# Enables helpful colorization of command line output
+$ git config --global color.ui auto
+```
+
+### Git file operation
+```bash
+# Deletes the file from the working directory and stages the deletion
+$ git rm <file>
+# Removes the file from version control but preserves the file locally
+$ git rm --cached <file>
+```
+
+### Save fragment
+```bash
+# Temporarily stores all modified tracked files
+$ git stash
+# Restores the most recently stashed files
+$ git stash pop
+# Lists all stashed changesets
+$ git stash list
+# Discards the most recently stashed changeset
+$ git stash drop
+# Create a branch from a Stash
+$ git stash branch <branch>
 ```
 
 ### Check the difference
@@ -31,6 +82,10 @@ $ git diff [HEAD]
 $ git diff --cached
 # Show difference between two commits
 $ git diff <old_commit> <new_commit>
+# Show the commits on branchA that are not on branchB
+$ git diff <branchB>...<branchA>
+# Outputs metadata and content changes of the specified commit
+$ git show <commit>
 ```
 
 ### Push changes to remote
@@ -74,6 +129,9 @@ $ git push <remote> :<tag or branch>
 $ git push <remote> :refs/tags/<tag>
 # Delete a branch (with the same name as a tag) from a remote
 $ git push <remote> :refs/heads/<branch>
+
+# Merge a branch to current
+$ git merge <branch>
 ```
 
 ### Show the log
@@ -90,6 +148,8 @@ $ git log --author="<pattern>"
 $ git log <since>..<until>
 # Draw text based graph of commits
 $ git log --graph --decorate
+# List the versions of a file
+$ git log --follow <file>
 ```
 
 ### Git reset
@@ -153,4 +213,18 @@ $ git merge seotweaks
 $ git diff <old_commit>  <new_commit> > my.patch
 # Apply the patch
 $ git apply my.patch
+
+# Prepare a patch for other developers
+$ git format-patch origin
+# Apply a patch that some sent you
+$ git am -3 patch.mbox
+# (in case of a conflict, resolve and use
+$ git am --resolved )
+```
+
+### Repository operations
+```bash
+# Check for errors and cleanup repository
+$ git fsck
+$ git gc --prune
 ```
