@@ -32,8 +32,6 @@ $ git checkout <commit> <file>
 # Checking in a file
 $ git commit -a -m "<commit message>"
 
-# Unstage a file
-$ git reset HEAD file_path
 # Checkout a remote branch
 $ git fetch
 $ git checkout <branch>
@@ -42,6 +40,9 @@ $ git checkout -b [branch]
 # Checkout a remote tag to a branch
 $ git fetch
 $ git checkout -b <branch> tags/<tag>
+
+# Adopt a commit from other branch
+$ git cherry-pick <commit>
 ```
 
 ### Config the Git
@@ -49,9 +50,13 @@ $ git checkout -b <branch> tags/<tag>
 # Sets the name you want attached to your commit transactions
 $ git config --global user.name "<name>"
 # Sets the email you want attached to your commit transactions
-$ git config --global user.email "[email address]"
+$ git config --global user.email "<email address>"
 # Enables helpful colorization of command line output
 $ git config --global color.ui auto
+# Sets the core editor for commit
+$ git config --system core.editor <editor>
+# Open the global configuration file in a text editor for manual editing.
+$ git config --global --edit
 ```
 
 ### Git file operation
@@ -156,6 +161,9 @@ $ git log --follow <file>
 
 ### Git reset
 ```bash
+# Unstage a file, put a file from staging area to working directory
+$ git reset HEAD <file>
+
 # Reset staging area to match most recent commit, but leave the working directory unchanged.
 $ git reset
 # Reset staging area and working directory to match most recent commit
