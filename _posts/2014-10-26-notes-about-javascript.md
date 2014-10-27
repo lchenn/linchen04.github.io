@@ -19,13 +19,13 @@ var re = /ab+c/;
 // Using RegExp object to create a regular expression
 var re = new RegExp("ab+c");
 
-
 //with flag
 var re = /\w+\s/g;
 var re = new RegExp("\\w+\\s", "g");
 ```
 
 Examples of using regular expressions in Javascript.
+
 ```javascript
 // Escapes regular expression in a string.
 function escapeRegExp(string) {
