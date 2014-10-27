@@ -5,7 +5,7 @@ categories:
 tags: "FrontEnd"
 ---
 
-I have been using JavaScript for quite some time. Recently I feel like I need to re-learn it more carefully. I found (this tutorial)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide] from Mozilla Development Netowrk are very useful. I would like to take some notes while reading it.
+I have been using JavaScript for quite some time. Recently I feel like I need to re-learn it more carefully. I found [this tutorial](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide) from Mozilla Development Netowrk is very useful. I would like to take some notes while reading it.
 
 ### Javascript Object
 
