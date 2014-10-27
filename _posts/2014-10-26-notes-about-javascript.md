@@ -11,3 +11,25 @@ I have been using JavaScript for quite some time. Recently I feel like I need to
 
 - Any JavaScript function can be used as a constructor. You use the new operator with a constructor function to create a new object.
 
+### Module pattern (Anonymous Closures)
+```javascript
+var MODULE = (function () {
+	var my = {};
+    var privateVariable = 1;
+
+	function privateMethod() {
+		// ...
+	}
+
+	my.moduleProperty = 1;
+	my.moduleMethod = function () {
+		// ...
+	};
+
+	return my;
+}());
+```
+
+
+##### Reference
+- [Module pattern](http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html)
