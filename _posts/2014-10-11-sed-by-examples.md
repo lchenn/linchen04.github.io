@@ -11,7 +11,8 @@ tags: "Linux"
 
 
 #### Use sed to replace line break
-Example to replace a line break
+An example to replace a line break:
+
 ```bash
 $ sed ':a;N;$!ba;s/\n/ /g' file
 # The explanation is:
