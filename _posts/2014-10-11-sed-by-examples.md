@@ -18,9 +18,22 @@ $ sed [options] '[[address1,[address2]][!]{cmd}' file
 ```
 
 #### Addresses
-An address can be either a regular expression enclosed by forward slashes /regex/ , or a line number . The ***$*** symbol can be used in place of a line number to denote the last line.
+An address can be either a regular expression enclosed by forward slashes /regex/, or a line number. The ***$*** symbol can be used in place of a line number to denote the last line.
 
 If one address is given, then the command is applied to lines containing that address. If two addresses are given separated by a comma, then the command is applied to all lines between the two lines that match the pattern.
+
+Examples:
+
+```bash
+# Replace "my" with "yours" from line 1 to 5
+$ sed '1,5s/my/yours/g' file.txt
+# Add a "# " to the 3 lines after the 1st appearance of "dog"
+$ sed '/dog/,+3s/^/# /g' file.txt
+# Delete the 2nd line
+$ sed '2d' file.txt
+# Delete from the 2nd line to the end of the file
+$ sed '2,$d' file.txt
+```
 
 #### Commands
 ```
