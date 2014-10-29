@@ -35,6 +35,22 @@ $ sed '2d' file.txt
 $ sed '2,$d' file.txt
 ```
 
+
+#### Pattern Space
+```c
+# Pseudo code
+foreach line in file {
+    // Put a line into Pattern_Space
+    Pattern_Space <= line;
+    // For each pattern space, execute sed command
+    Pattern_Space <= EXEC(sed_cmd, Pattern_Space);
+    // If no "-n", print the pattern space
+    if (sed option hasn't "-n")  {
+       print Pattern_Space
+    }
+}
+````
+
 #### Commands
 ```
 a text # Append text, which has each embedded newline preceded by a backslash.
@@ -126,6 +142,86 @@ $ sed 's/This is my \([^,]*\),.*is \(.*\)/\1:\2/g' my.txt
 # dog:frank
 # fish:george
 # goat:adam
+```
+
+#### Use ***c*** to replace full line
+```bash
+sed '[address1[,address2]]c text <file.txt>
+```
+
+Examples
+
+Replace the 2nd line
+
+```bash
+$ sed "2 c This is my monkey, my monkey's name is wukong" my.txt
+# This is my cat, my cat's name is betty
+# This is my monkey, my monkey's name is wukong
+# This is my fish, my fish's name is george
+# This is my goat, my goat's name is adam
+```
+
+Replace the lines having fish.
+
+```bash
+$ sed "/fish/c This is my monkey, my monkey's name is wukong" my.txt
+# This is my cat, my cat's name is betty
+# This is my dog, my dog's name is frank
+# This is my monkey, my monkey's name is wukong
+# This is my goat, my goat's name is adam
+```
+
+
+#### Use ***d*** to delete lines
+```bash
+sed '[address1[,address2]]d <file.txt>
+```
+
+Examples
+
+```bash
+# Delete lines containing fish
+$ sed '/fish/d' my.txt
+# Delete the 2nd line
+$ sed '2d' my.txt
+# Delete from the 2nd line
+$ sed '2,$d' my.txt
+```
+
+#### Use ***p*** to print lines
+Use -n to only print the matched lines.
+
+Examples:
+
+```bash
+# Print the lines containing fish
+$ sed -n '/fish/p' my.txt
+# Print from the 1st line having "dog" to the 1st line having "fish"
+$ sed -n '/dog/,/fish/p' my.txt
+# Print the 2nd line to the first match of "fish"
+$ sed -n '1,/fish/p' my.txt
+```
+
+
+#### Use ***i*** and ***a*** to insert and append lines
+```bash
+# Insert text in the 1st line, inserted will be the 1st
+$ sed "1 i This is my monkey, my monkey's name is wukong" my.txt
+# Append text after the 1st line, inserted will be the 2nd
+$ sed "1 a This is my monkey, my monkey's name is wukong" my.txt
+# Insert a line after every line matching fish
+$ sed "/fish/a This is my monkey, my monkey's name is wukong" my.txt
+```
+
+
+#### Use multiple commands
+
+Examples
+```bash
+# From line 3 to 6, matching "This", then match "fish", then d
+$ sed '3,6 {/This/{/fish/d}}' pets.txt
+# If a line having "This", delete it. If there is a space, trim it
+$ sed '1,${/This/d;s/^ *//g}' pets.txt
 ```
 
 
