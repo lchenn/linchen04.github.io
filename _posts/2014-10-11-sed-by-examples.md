@@ -146,7 +146,7 @@ $ sed 's/This is my \([^,]*\),.*is \(.*\)/\1:\2/g' my.txt
 
 #### Use ***c*** to replace full line
 ```bash
-sed '[address1[,address2]]c text <file.txt>
+sed '[address1[,address2]]c' text <file.txt>
 ```
 
 Examples
@@ -174,7 +174,7 @@ $ sed "/fish/c This is my monkey, my monkey's name is wukong" my.txt
 
 #### Use ***d*** to delete lines
 ```bash
-sed '[address1[,address2]]d <file.txt>
+sed '[address1[,address2]]d' <file.txt>
 ```
 
 Examples
