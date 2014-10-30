@@ -11,6 +11,7 @@ tags: "Linux"
 Options:
 
 ```bash
+# Use application/x-www-form-urlencoded mime-type to send the request
 -d, --data ----data-ascii
 --data-urlencode
 --data-binary
@@ -30,12 +31,18 @@ When used, this option will make all data specified with -d, --data, --data-bina
 ```
 
 ### Emulate filling a form
-Options
+Options:
+
 ```bash
 -F, --form <name=content>
 ```
 
-Examples
+***-F*** use ***multipart/form-data*** mime type to send post request.
+
+
+
+Examples:
+
 ```bash
 # Upload a file
 curl -F "web-@index.html" www.example.com
@@ -57,14 +64,16 @@ curl -F "file=@\"localfile\";filename=\"nameinpost\"" url.com
 
 
 ### Handling cookies
-Options
+Options:
 
 ```bash
--b, --cookie <name=data> # Setup the cookie, multiple cookies are in the format of "NAME1=VALUE1; NAME2=VALUE2"
--c, --cookie-jar <file name> # Specify which file to write cookies after a completed http request
+# Setup the cookie, multiple cookies are in the format of "NAME1=VALUE1; NAME2=VALUE2"
+-b, --cookie <name=data>
+# Specify which file to write cookies after a completed http request
+-c, --cookie-jar <file name>
 ```
 
-Examples
+Examples:
 
 ```bash
 # Send hard coded cookie pairs
@@ -94,3 +103,32 @@ $ curl http://{one,two}.site.com -o "file_#1.txt"
 # Use multiple variables, th
 $ curl http://{site,host}.host[1-5].com -o "#1_#2"
 ```
+
+### Upload files
+Options:
+
+```bash
+-T
+```
+
+Examples of uploading to FTP/FTPS/SFTP/SCP:
+
+```bash
+# Upload all data on stdin to a specified server:
+$ curl -T - ftp://ftp.upload.com/myfile
+#Upload data from a specified file, login with user and password:
+$ curl -T uploadfile -u user:passwd ftp://ftp.upload.com/myfile
+# Upload a local file to the remote site, and use the local file name at the remote site too:
+$ curl -T uploadfile -u user:passwd ftp://ftp.upload.com/
+# Upload a local file to get appended to the remote file:
+curl -T localfile -a ftp://ftp.upload.com/remotefile
+```
+
+Example of uploading to HTTP put.
+```bash
+# Upload all data on stdin to a specified HTTP site which can accept put request
+$ curl -T - http://www.upload.com/myfile
+```
+
+#### Reference
+[Curl manual](http://curl.haxx.se/docs/manual.html)
