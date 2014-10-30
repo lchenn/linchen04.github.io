@@ -278,9 +278,5 @@ cat a | sort | uniq -c # create a histogram
 
 ### Linux control characters
 
-
-### curl
-
-
 #### Reference
 - Some of them came from [here](http://www.commandlinefu.com/commands/browse/sort-by-votes)
