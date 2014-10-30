@@ -6,6 +6,11 @@ tags: "Linux"
 ---
 
 
+### Setup the user-agent
+```bash
+#Specify the User-Agent string to send to the HTTP server.
+-A, --user-agent <agent string>
+```
 
 ### Send HTTP post request
 Options:
@@ -133,3 +138,4 @@ $ curl -T - http://www.upload.com/myfile
 
 #### Reference
 [Curl manual](http://curl.haxx.se/docs/manual.html)
+[User agent string](http://www.useragentstring.com/pages/useragentstring.php)
