@@ -6,19 +6,28 @@ tags: "Linux"
 ---
 
 
-### Setup the user-agent
+
+### Basic options
 ```bash
-#Specify the User-Agent string to send to the HTTP server.
+# Specify the User-Agent string to send to the HTTP server
 -A, --user-agent <agent string>
+# Write the protocol headers to the specified file
+-D, --dump-header <file>
+# Extra header to use when getting a web page
+-H, --header <header>
+# Specify which config file to read curl arguments from
+-K, --config <config file>
 ```
 
 ### Send HTTP post request
 Options:
 
 ```bash
-# Use application/x-www-form-urlencoded mime-type to send the request
+# Uses application/x-www-form-urlencoded mime-type to send the request
 -d, --data ----data-ascii
+# Sends the post request and performs url encoding
 --data-urlencode
+# Posts data exactly as specified with no extra processing whatsoever
 --data-binary
 ```
 
@@ -137,5 +146,5 @@ $ curl -T - http://www.upload.com/myfile
 ```
 
 #### Reference
-[Curl manual](http://curl.haxx.se/docs/manual.html)
-[User agent string](http://www.useragentstring.com/pages/useragentstring.php)
+- [Curl manual](http://curl.haxx.se/docs/manual.html)
+- [User agent string](http://www.useragentstring.com/pages/useragentstring.php)
