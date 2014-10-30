@@ -125,6 +125,7 @@ curl -T localfile -a ftp://ftp.upload.com/remotefile
 ```
 
 Example of uploading to HTTP put.
+
 ```bash
 # Upload all data on stdin to a specified HTTP site which can accept put request
 $ curl -T - http://www.upload.com/myfile
