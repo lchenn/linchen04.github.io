@@ -7,3 +7,14 @@ author: linchen04
 highlighter: pygments
 safe: true
 paginate: 16
+
+# Settings for analytics helper
+# Set 'provider' to the analytics provider you want to use.
+# Set 'provider' to false to turn analytics off globally.
+#        
+analytics :
+  provider : google
+  google : 
+      tracking_id : 'UA-56284164-1'
+  getclicky :
+    site_id :
