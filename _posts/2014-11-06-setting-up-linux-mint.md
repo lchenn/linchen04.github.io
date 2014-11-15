@@ -121,6 +121,14 @@ sudo gem install redcarpet --no-rdoc --no-ri
 
 		//servername/sharename /media/windowsshare cifs credentials=/home/ubuntuusername/.smbcredentials,uid=user,iocharset=utf8,sec=ntlm 0 0
 
+#### Mount samba share manually
+
+``` bash
+mount.cifs //servername/sharename mountlocation/ -o credentials=/home/user/.smbcredentials,uid=userid,iocharset=utf8,sec=ntlm
+mount.cifs //servername/sharename mountlocation/ -o user=username,password=passwd,uid=userid,iocharset=utf8,sec=ntlm
+```
+
+
 #### Setup the video card
 Check the video card driver setting
 
