@@ -21,7 +21,7 @@ tags: "Linux"
 #### Configure the Tex Environment
 
 ```bash
-sudo apt-get install texlive texlive-generic-extra texmaker
+sudo apt-get install texlive texlive-generic-extra texlive-fonts-extra texmaker
 ```
 
 ##### To use the normal tlmgr package manager:
